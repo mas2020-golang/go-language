@@ -14,7 +14,7 @@ type BaseType struct {
 
 func (b *BaseType) Greetings() {
 	fmt.Println("Hello from BaseType!")
-	b.Name = "test"
+	(*b).Name = "test"
 }
 
 /*
@@ -38,9 +38,9 @@ func createSpecificType() {
 
 	// new SpecificType using literal
 	st1 := SpecificType{
-		&BaseType{Name: "My name", Surname: "Surname from Base Type", Age: 12},
-		"Type of spec type",
-		"Cat of spec type",
+		Type:     "Type of spec type",
+		Category: "Cat of spec type",
+		BaseType: &BaseType{Name: "My name", Surname: "Surname from Base Type", Age: 12},
 	}
 	// IMPORTANT: you can directly use the methods of the BaseType structure implicit included in the SpecificType
 	st1.Greetings()

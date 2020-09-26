@@ -19,6 +19,10 @@ type Vehicle struct {
 	year       int
 }
 
+func (v Vehicle) Go() {
+	fmt.Println("Started!")
+}
+
 func main() {
 	initializeStruct()
 
@@ -31,7 +35,7 @@ func initializeStruct() {
 		The following code shows how to initialize a struct
 	*/
 	// 1- Using the literal syntax
-	fmt.Println(&Vehicle{brand: "Fiat",
+	fmt.Println(Vehicle{brand: "Fiat",
 		model:      "Punto",
 		horsepower: 90,
 		year:       2002})
@@ -43,6 +47,7 @@ func initializeStruct() {
 	v.horsepower = 120
 	v.year = 2020
 	fmt.Println(v)
+	v.Go()
 
 	// 3- using literal in a particular order omitting the name of the fields
 	fmt.Println(Vehicle{"Fiat", "Giulia", 140, 2018})
