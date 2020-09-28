@@ -25,6 +25,10 @@ func variables(){
 	name1, age1 = "test", 1
 	fmt.Println("variables are:", name1, age1)
 
+	// declaration of multiple variables
+	var a,b,c int
+	println("variables a,b,c, are:", a,b,c)
+
 	// Variable can also be declared one by one
 	var one string
 	var second int
