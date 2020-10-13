@@ -25,6 +25,7 @@ func main() {
 	// two arrays are equals if the elements have the same values
 	fmt.Println("b == c", b == c)
 
+	// init and implicit declare specifying the size
 	i1 := [3]int{1,2,3}
 	i2 := [3]int{1,2,4}
 	i3 := [4]int{1,2,4,5}
