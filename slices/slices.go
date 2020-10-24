@@ -60,13 +60,13 @@ func checkNilValues(){
 
 	// nil values
 	var s []int
-	fmt.Printf("len(s) is %v, len == nil; %v\n", len(s), s == nil) // len(s) is 0, len == nil; true
+	fmt.Printf("len(s) is %v, s == nil; %v\n", len(s), s == nil) // len(s) is 0, len == nil; true
 	s = nil
-	fmt.Printf("len(s) is %v, len == nil; %v\n", len(s), s == nil) // len(s) is 0, len == nil; true
+	fmt.Printf("len(s) is %v, s == nil; %v\n", len(s), s == nil) // len(s) is 0, len == nil; true
 	s = []int(nil)
-	fmt.Printf("len(s) is %v, len == nil; %v\n", len(s), s == nil) // len(s) is 0, len == nil; true
+	fmt.Printf("len(s) is %v, s == nil; %v\n", len(s), s == nil) // len(s) is 0, len == nil; true
 	s = []int{}
-	fmt.Printf("len(s) is %v, len == nil; %v\n", len(s), s == nil) // len(s) is 0, len == nil; false
+	fmt.Printf("len(s) is %v, s == nil; %v\n", len(s), s == nil) // len(s) is 0, len == nil; false
 }
 
 /*
