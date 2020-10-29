@@ -27,15 +27,6 @@ type SpecificType struct {
 }
 
 func createSpecificType() {
-	// new SpecificType using the dot notation (ERROR if BaseType is a pointer)
-	//var st SpecificType
-	//st.Name = "My name"
-	//st.Age = 12
-	//st.Category = "Cat of spec type"
-	//st.Type = "Type of spec type"
-	//st.Surname = "Surname from Base Type"
-	//fmt.Println(st)
-
 	// new SpecificType using literal
 	st1 := SpecificType{
 		Type:     "Type of spec type",

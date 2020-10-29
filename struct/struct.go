@@ -24,13 +24,14 @@ func (v Vehicle) Go() {
 }
 
 func main() {
-	initializeStruct()
+	fmt.Println("---Init struct")
+	initStruct()
 
 	// use the composition
 	createSpecificType()
 }
 
-func initializeStruct() {
+func initStruct() {
 	/*
 		The following code shows how to initialize a struct
 	*/
@@ -57,4 +58,20 @@ func initializeStruct() {
 	fmt.Println(new(Vehicle))
 	// It is similar to
 	fmt.Println(&Vehicle{})
+}
+
+/*
+Shows how to use pointers with struct.
+ */
+func accessByPointers(){
+	var car *Vehicle = &Vehicle{brand: "Fiat",
+		model:      "Punto",
+		horsepower: 90,
+		year:       2002}
+
+	(*car).horsepower = 100
+	// or, Go dereferences the value automatically
+	car.horsepower = 100
+
+
 }
