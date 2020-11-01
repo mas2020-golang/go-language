@@ -142,10 +142,11 @@ func reverse(a []int){
 }
 
 func appendElement(){
+	fmt.Println("\n---Example of append")
 	// Creation of a slice of 5 elements
 	i := make([]int, 5, 10)
-	fmt.Printf("type is %T, len is %v, cap is a %v\n",i,  len(i), cap(i)) // => 4, 4
-	fmt.Println(i) // => len == 5
+	fmt.Printf("type is %T, len is %v, cap is a %v\n",i,  len(i), cap(i)) // type is []int, len is 5, cap is a 10
+	fmt.Println(i) // => [0 0 0 0 0]
 	i = append(i, 100)
 	fmt.Println(i) // len == 6, cap == 10 => [0 0 0 0 0 100]
 }
