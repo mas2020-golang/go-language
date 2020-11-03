@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"text/template"
 	"time"
 )
@@ -19,6 +20,8 @@ type Computer struct {
 }
 
 func main() {
+
+
 	computers := fillComputers()
 	fmt.Println("--Range example:")
 	var t string
@@ -29,10 +32,21 @@ func main() {
 }
 
 func execTemplate(computers *[]Computer, t string){
-	c, err := template.New("computers").Parse(t)
+	// define a custom function
+	funcMap := template.FuncMap{
+		// title function returns Title(t) + the color closed into parentheses
+		"title": func(t,color string) string {
+			output := strings.Join([]string{strings.Title(t), strings.ToLower("(" + color + ")")}, " ")
+			return output
+		},
+	}
+
+	// Create template, attach a function to it then parse
+	c, err := template.New("computers").Funcs(funcMap).Parse(t)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Execute the template and write its  output on the stdout stream
 	if err := c.Execute(os.Stdout, computers); err != nil {
 		log.Fatal(err)
 	}
@@ -41,7 +55,7 @@ func execTemplate(computers *[]Computer, t string){
 func fillComputers() []Computer {
 	var computers []Computer = []Computer{
 		{
-			Brand:       "Apple",
+			Brand:       "apple",
 			OS:          "Catalina",
 			Age:         time.Date(2016, 2, 1, 0, 0, 0, 0, time.UTC),
 			Color:       "Silver",
@@ -50,7 +64,7 @@ func fillComputers() []Computer {
 			Accessories: map[string]int{"mouse": 12, "keyboard": 20},
 		},
 		{
-			Brand:       "Dell",
+			Brand:       "dell",
 			OS:          "Windows 10",
 			Age:         time.Date(2018, 2, 1, 0, 0, 0, 0, time.UTC),
 			Color:       "Black",
@@ -92,22 +106,24 @@ Screen: {{ $screen }}
 
 /*
 Shows how to:
+- capitalize the brand + join color using a custom function attached to the template
+- use the printf function to quote an input parameter
 - define variables and use the values forward
-- check conditions of two defined variables
+- check conditions of two defined variables to print a content or not
 */
 func ifExample() string {
 	var t = `{{- range . -}}
 -------------------------------------
-Brand: {{ .Brand }}
-OS: {{ .OS }}
+Brand: {{ title .Brand .Color }}
+OS: {{ printf "%q" .OS }}
 Age: {{ .Age }}
 Mouse: {{ .Accessories.mouse }}
 	{{- /* definition of $screen and $mouse as variables */ -}}
-  {{- $screen := index .Accessories "screen" }}
+  	{{- $screen := index .Accessories "screen" }}
 	{{- $mouse := index .Accessories "mouse" }}
-	{{- if and $screen $mouse }}
+		{{- if and $screen $mouse }}
 Screen + mouse: {{ $screen }} + {{ $mouse }}
-	{{- end }}
+		{{- end }}
 -------------------------------------
 {{ end -}}
 `
