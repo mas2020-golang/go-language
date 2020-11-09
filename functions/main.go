@@ -23,6 +23,11 @@ func main() {
 
 	// recursive example
 	searchHtml()
+
+	// assign function to a variable
+	f := example
+	// then call it
+	fmt.Println("result of f() is:", f(1, "10"))
 }
 
 /*
