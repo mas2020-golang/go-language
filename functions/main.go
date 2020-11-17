@@ -32,6 +32,8 @@ func main() {
 	// Example to pass as argument of a function a parameter that is another
 	// function itself
 	testWithFuncInput(example)
+
+	useCounter()
 }
 
 /*
@@ -39,7 +41,7 @@ func main() {
 	caller a int value.
 */
 func example(par1 int, par2 string) int {
-	fmt.Println("the par2 has this value: ", par2)
+	//fmt.Println("the par2 has this value: ", par2)
 	return par1 * 2
 }
 
@@ -48,8 +50,9 @@ This func accepts has its input another func
  */
 func testWithFuncInput(f func(par1 int, par2 string) int){
 	for i:=0; i < 10; i++{
-		fmt.Println(f(i, string(i)))
+		fmt.Printf("%d,",f(i, string(i)))
 	}
+	fmt.Println()
 }
 
 func exampleNoReturn(par1 int, par2 string) {
