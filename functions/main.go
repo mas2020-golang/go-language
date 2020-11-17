@@ -7,33 +7,40 @@ import "fmt"
 */
 
 func main() {
-	// call a function with two params that comes back an int
-	retValue := example(100, "test")
-	fmt.Println("retValue is", retValue)
-	fmt.Printf("Type of example is %T\n", example)
+	//// call a function with two params that comes back an int
+	//retValue := example(100, "test")
+	//fmt.Println("retValue is", retValue)
+	//fmt.Printf("Type of example is %T\n", example)
+	//
+	//// call a function that returns multiple values
+	//ret1, ret2 := multipleReturns(100, "test")
+	//fmt.Printf("ret1: %d, ret2: %s\n", ret1, ret2)
+	//fmt.Printf("Type of exampleNoReturn is %T\n", exampleNoReturn)
+	//
+	//// call a function that returns multiple named values
+	//ret1, ret2 = multipleNamedReturns(200, "test")
+	//fmt.Printf("---multipleNamedReturns ret1: %d, ret2: %s\n", ret1, ret2)
+	//
+	//// recursive example
+	//searchHtml()
+	//
+	//// assign function to a variable
+	//f := example
+	//// then call it
+	//fmt.Println("result of f() is:", f(1, "10"))
+	//
+	//// Example to pass as argument of a function a parameter that is another
+	//// function itself
+	//testWithFuncInput(example)
+	//
+	//useCounter()
 
-	// call a function that returns multiple values
-	ret1, ret2 := multipleReturns(100, "test")
-	fmt.Printf("ret1: %d, ret2: %s\n", ret1, ret2)
-	fmt.Printf("Type of exampleNoReturn is %T\n", exampleNoReturn)
+	//// Another example of recursion with anonymous function
+	//for i, course := range topoSort(prereqs) {
+	//	fmt.Printf("%d:\t%s\n", i+1, course)
+	//}
 
-	// call a function that returns multiple named values
-	ret1, ret2 = multipleNamedReturns(200, "test")
-	fmt.Printf("---multipleNamedReturns ret1: %d, ret2: %s\n", ret1, ret2)
-
-	// recursive example
-	searchHtml()
-
-	// assign function to a variable
-	f := example
-	// then call it
-	fmt.Println("result of f() is:", f(1, "10"))
-
-	// Example to pass as argument of a function a parameter that is another
-	// function itself
-	testWithFuncInput(example)
-
-	useCounter()
+	counterNew()
 }
 
 /*
