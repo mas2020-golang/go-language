@@ -40,7 +40,10 @@ func main() {
 	//	fmt.Printf("%d:\t%s\n", i+1, course)
 	//}
 
-	counterNew()
+	//counterNew()
+
+	fmt.Println(variadic("Hello", "from", "me!"))
+	fmt.Println(variadic([]string{"Hello", "from", "me!"}...))
 }
 
 /*
