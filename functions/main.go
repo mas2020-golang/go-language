@@ -42,8 +42,10 @@ func main() {
 
 	//counterNew()
 
-	fmt.Println(variadic("Hello", "from", "me!"))
-	fmt.Println(variadic([]string{"Hello", "from", "me!"}...))
+	//fmt.Println(variadic("Hello", "from", "me!"))
+	//fmt.Println(variadic([]string{"Hello", "from", "me!"}...))
+
+	bigSlowOperation()
 }
 
 /*
