@@ -21,6 +21,14 @@ func (v VehicleNew) GoSlow() {
 	fmt.Println("Started!")
 }
 
+var color = struct {
+	rgb int
+	name string
+}{
+	100,
+	"red",
+}
+
 func useVehicleNew(){
 	// new object
 	vn := VehicleNew{
