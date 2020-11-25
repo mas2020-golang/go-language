@@ -32,6 +32,9 @@ func main() {
 
 	// use the composition
 	createSpecificType()
+
+	fmt.Println("---Use method on VehicleN")
+	useVehicleNew()
 }
 
 func initStruct() {
