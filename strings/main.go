@@ -10,13 +10,13 @@ import "unicode/utf8"
 func main() {
 	//slice()
 	//fmt.Println("---Rune")
-	//decodeRunes()
+	decodeRunes()
 	//fmt.Println("---Unicode Escapes")
 	//unicodeEscapes()
 	//fmt.Println("---Get Runes")
 	//getRunes()
 	//fmt.Println(comma("123456789"))
-	conversions()
+	//conversions()
 	fmt.Printf("int into string: %v", useByteBuffer([]int{65, 66, 67}))
 }
 
@@ -29,8 +29,13 @@ func slice() {
 
 func decodeRunes() {
 	s := "◊Hello, ◊Ç∞"
-	fmt.Println("bytes length:", len(s))                      // "15"
+	fmt.Println("bytes length:", len(s))                      // "18"
 	fmt.Println("rune in string:", utf8.RuneCountInString(s)) // "11"
+
+	for i := 0; i < len(s);i++ {
+		fmt.Printf("counter: %d, %s", i, s[i])
+	}
+	fmt.Println()
 
 	// Decoding rune: scan of a string reading the character based on the position due to the size
 	// of the previous char
