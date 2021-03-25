@@ -43,3 +43,41 @@ func countdown() {
 	println()
 	launch()
 }
+
+// Countdown using the Ticker
+func countdownTicker() {
+	abort := make(chan struct{})
+	// Separate go routine listening that sends an empty structure on the abort channel in
+	// case the user will press enter
+	go func() {
+		fmt.Println("Press return to abort...")
+		os.Stdin.Read(make([]byte, 1)) // read a single byte
+		fmt.Println("return pressed, aborting...")
+		abort <- struct{}{}
+	}()
+
+	// this code is executed on the main go routine and will block until a case is not satisfied: in that case
+	// it will execute the corresponding statements and the will go on to the following statements (if any) after
+	// the select
+
+	/*
+		using the Ticker prevent from go routine leak because using the Stop() method causes the ticker's go routine
+		to terminate
+	*/
+	ticker := time.NewTicker(1 * time.Second)
+	for c := 9; c > 0; c-- {
+		select {
+		case <-ticker.C:
+			//fmt.Println("time is", t)
+			fmt.Printf("\r%d", c)
+		case <-abort:
+			fmt.Println("Launch aborted!")
+			ticker.Stop()
+			time.Sleep(500 * time.Millisecond) // to take time go routine to close (not necessary, only for test purpose)
+			return
+		}
+	}
+	ticker.Stop()
+	println()
+	launch()
+}

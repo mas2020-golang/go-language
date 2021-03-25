@@ -9,7 +9,7 @@ package main
   So, due to the length of the buffered channel to 1, we print the odd value from the for loop.
 
 	PAY ATTENTION: if we increase the length of the buffer the output is nondeterministic. When multiple cases
-  are valid at the same time the select will pick one the them randomly.
+  are valid at the same time the select will pick one of them randomly.
 */
 
 import "fmt"

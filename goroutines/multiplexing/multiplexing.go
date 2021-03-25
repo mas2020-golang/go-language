@@ -13,10 +13,13 @@ import (
 	eventually a value received on the other. The way to accomplish that is using a channel. Let's have a look.
 	A select waits until a communication for some case is ready to proceed.
 	It then performs that case executing the associated statements; the other communications do not happen.
+	Using the `default` clause means that specify what to do if none of the others cases can proceed immediately.
+	Usually it's used for polling.
 */
 
 func main() {
-	countdown()
+	//countdown()
+	countdownTicker()
 	//waitForLaunch()
 }
 
@@ -45,7 +48,9 @@ func waitForLaunch() {
 }
 
 func launch() {
-	fmt.Println("Main go on...")
+	fmt.Println("Launch take time, please wait 3 seconds...")
+	time.Sleep(3 * time.Second)
+	fmt.Println("Launch is gone!")
 }
 
 func count(delay time.Duration) {
