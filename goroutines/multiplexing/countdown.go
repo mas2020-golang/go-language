@@ -30,7 +30,7 @@ func countdown() {
 		still there trying to send values in a channel from which nobody is receiving, the risk is a go routine leak.
 	*/
 	tick := time.Tick(1 * time.Second)
-	for c := 9; c > 0; c-- {
+	for c := 3; c > 0; c-- {
 		select {
 		case <-tick:
 			//fmt.Println("time is", t)
@@ -65,7 +65,7 @@ func countdownTicker() {
 		to terminate
 	*/
 	ticker := time.NewTicker(1 * time.Second)
-	for c := 9; c > 0; c-- {
+	for c := 3; c > 0; c-- {
 		select {
 		case <-ticker.C:
 			//fmt.Println("time is", t)

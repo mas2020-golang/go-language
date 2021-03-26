@@ -19,8 +19,9 @@ import (
 
 func main() {
 	//countdown()
-	countdownTicker()
-	//waitForLaunch()
+	//countdownTicker()
+	waitForLaunch()
+	panic(nil)
 }
 
 func waitForLaunch() {
@@ -38,7 +39,7 @@ func waitForLaunch() {
 	// the select
 	fmt.Println("Press return to abort (you have three seconds)...")
 	select {
-	case <-time.After(5 * time.Second):
+	case <-time.After(3 * time.Second):
 		fmt.Println("\nFive seconds lasted...go on without interruptions")
 	case <-abort:
 		fmt.Println("Launch aborted!")
