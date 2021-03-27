@@ -10,7 +10,7 @@ import (
 	Example on how to using multiplexing with select. The select statement is a way to wait for completion from more
 	channels.
 	Think the case we have two channels and we need to catch the value from each other. The first we listen will block
-	eventually a value received on the other. The way to accomplish that is using a channel. Let's have a look.
+	eventually a value received on the other. The way to accomplish that is using a select. Let's have a look.
 	A select waits until a communication for some case is ready to proceed.
 	It then performs that case executing the associated statements; the other communications do not happen.
 	Using the `default` clause means that specify what to do if none of the others cases can proceed immediately.
@@ -18,13 +18,6 @@ import (
 */
 
 func main() {
-	//countdown()
-	//countdownTicker()
-	waitForLaunch()
-	panic(nil)
-}
-
-func waitForLaunch() {
 	abort := make(chan struct{})
 	// Separate go routine listening that sends an empty structure on the abort channel in
 	// case the user will press enter
@@ -40,7 +33,7 @@ func waitForLaunch() {
 	fmt.Println("Press return to abort (you have three seconds)...")
 	select {
 	case <-time.After(3 * time.Second):
-		fmt.Println("\nFive seconds lasted...go on without interruptions")
+		fmt.Println("\nThree seconds lasted without any abort signal")
 	case <-abort:
 		fmt.Println("Launch aborted!")
 		return
@@ -49,9 +42,9 @@ func waitForLaunch() {
 }
 
 func launch() {
-	fmt.Println("Launch take time, please wait 3 seconds...")
-	time.Sleep(3 * time.Second)
-	fmt.Println("Launch is gone!")
+	fmt.Println("Launch take time, please wait...")
+	time.Sleep(1 * time.Second)
+	fmt.Println("\nLaunch is gone!")
 }
 
 func count(delay time.Duration) {

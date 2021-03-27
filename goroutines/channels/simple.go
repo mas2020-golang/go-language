@@ -7,7 +7,7 @@ A channel is a reference to the data structure created by make.
 Copying a channel or pass one as an argument to a function, the reference is passed: an update will reflect on the caller
 and callee as they refer to the same data structure.
 * The zero value of a channel is nil.
-* Comparison between two channel is true if they refer to the same data structure
+* comparison between two channel is true if they refer to the same data structure
 
 To send a value through the channel: channel <- value operands
 To receive a value from a channel: <-channel operand
