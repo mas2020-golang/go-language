@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -25,23 +26,30 @@ func main() {
 
 func typeConversion() {
 	/*
-		This example convert some types into others
+		This example converts some types into others
 	*/
-	var i int = 100
+	var i, i2 int64 = 100, 0
 	var f float64 = float64(i) // convert int => float64
 	var u uint = uint(f)       // convert float64 to an unsigned int
+	// to convert from string to boolean, int you need the strconv package
+	b, _ := strconv.ParseBool("true")
+	// convert 1000 in base 10
+	i, _ = strconv.ParseInt("1000", 10, 0)
+	i2, _ = strconv.ParseInt("010101101", 2, 0)
 	fmt.Println("u is ", u)
+	fmt.Println("bool is ", b)
+	fmt.Println("int64 from 1000 is ", i) // => 1000
+	fmt.Println("int64 010101101 is ", i2) // => 173
 
-	var a Meters = 1000
-	var b Miles = Miles(a) * Miles(0.621371)
-	var c int = int(b) // value will be 621
-	fmt.Println("a, b, c are:", a, b, c)
+	var meters Meters = 1000
+	var miles Miles = Miles(meters) * Miles(0.621371)
+	var c int = int(miles) // value will be 621
+	fmt.Println("meters, miles, c are:", meters, b, c)
 
 	// Comparisons
-	fmt.Println("a == 0", a == 0)
-	fmt.Println("a > 0", a > 0)
-	fmt.Println("a == b (Meter == Miles)", a == b)
-
+	fmt.Println("meters == 0", meters == 0)
+	fmt.Println("meters > 0", meters > 0)
+	//fmt.Println("meters == miles (Meter == Miles)", meters == miles) // error, mismatched type
 }
 
 func typeAssertion(y interface{}) {
