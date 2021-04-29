@@ -19,7 +19,7 @@ import (
 */
 
 // sema is a counting semaphore for limiting concurrency in dirents.
-var sema = make(chan struct{}, 20)
+var sema = make(chan struct{}, 50)
 
 func main() {
 	var verbose = flag.Bool("v", false, "show verbose progress messages")
@@ -36,7 +36,7 @@ func main() {
 		unbuffered channel that is incremented on the way. When the recursion is done the channel
 		is closed.
 	*/
-	fileSizes := make(chan int64)
+	fileSizes := make(chan int64, 100)
 	// wait group is a way to know when the walkDir has finished its job. When the n is 0 it is the end. n is incremented
 	// by Add() method and decremented by Done() method
 	var n sync.WaitGroup
@@ -55,7 +55,7 @@ func main() {
 	// Print the results periodically.
 	var tick <-chan time.Time
 	if *verbose {
-		tick = time.Tick(1000 * time.Millisecond)
+		tick = time.Tick(500 * time.Millisecond)
 	}
 
 	// Print the results.
