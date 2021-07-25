@@ -8,7 +8,8 @@ import (
 )
 
 /*
-	This example shows how to cancel a go routine that is working.
+	This example shows how to cancel a go routine that is working using a done channel that is checked every
+	time the go routine starts a new work cycle.
 */
 
 // listen channel (nil)
@@ -23,7 +24,7 @@ func main() {
 	This routine use the select statement for multiplexing listening from two different channels.
 	In case the done channel receive a value the routine will be stopped.
 */
-func doSomething(routine int, done chan bool, ch chan<- int) {
+func doSomething(routine int, ch chan<- int) {
 	fmt.Printf("#%d go routine start\n", routine)
 
 	// do some work
@@ -48,6 +49,7 @@ func doSomething(routine int, done chan bool, ch chan<- int) {
 func cancelled() bool {
 	select {
 	case <-done:
+		fmt.Println("cancelled is done!")
 		return true
 	default:
 		return false
@@ -61,7 +63,7 @@ func cancelled() bool {
 func withCancellation() {
 	fmt.Println("Main go routine start...")
 	for i := 0; i < 3; i++ {
-		go doSomething(i, done, listen)
+		go doSomething(i, listen)
 	}
 
 	// Cancel traversal when input is detected.
@@ -70,22 +72,22 @@ func withCancellation() {
 		close(done)
 	}()
 
-	// close the channel (closing a channel means to drain the values and then to get forever the zero value of the channel type)
-	//close(done)
-	// wait for the go routine to close before end
+	// wait for the go routine to end before exit
 loop:
 	for i := 0; i < 3; i++ {
 		select {
-		//case <-done:
-		//	break loop
 		case routine, ok := <-listen:
 			if ok {
-				fmt.Printf("receive end from routine #%d\n", routine)
+				fmt.Printf("receive end signal from go routine #%d\n", routine)
 			} else {
 				break loop
 			}
+		case <-time.After(10 * time.Second):
+			fmt.Println("timeout exceeded, application will be forced to stop...")
+			close(done)
+			time.Sleep(5 * time.Second) // some time to close other go routine (not deterministic)
+			break loop
 		}
 	}
 	fmt.Println("Main go routine end...")
-	time.Sleep(200 * time.Millisecond)
 }
